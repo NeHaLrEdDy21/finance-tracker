@@ -1,73 +1,141 @@
-# Welcome to your Lovable project
+# Finance Tracker
 
-## Project info
+A modern personal finance tracking application built with React and TypeScript. Track expenses, manage budgets, and visualize your spending patterns.
 
-**URL**: https://lovable.dev/projects/7e611713-cb11-44a4-ab37-6489565d89fa
+[Live Demo](https://vercel.com/nehalreddy21s-projects/finance-tracker/EM3HTyGqC7qLACZJwrRVybTwn2B6)
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- 💰 Transaction Management
+  - Add, edit, and delete transactions
+  - Categorize expenses
+  - Track income and expenses
 
-**Use Lovable**
+- 📊 Budget Planning
+  - Set monthly category budgets
+  - Budget vs actual comparison
+  - Spending insights and alerts
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7e611713-cb11-44a4-ab37-6489565d89fa) and start prompting.
+- 📈 Analytics
+  - Monthly expense trends
+  - Category-wise analysis
+  - Visual spending breakdowns
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+- **Frontend:**
+  - React 18
+  - TypeScript
+  - Vite
+  - TailwindCSS
+  - shadcn/ui
+  - Recharts for data visualization
+  - React Query for data management
+  - React Router for navigation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Backend:**
+  - Node.js
+  - Express
+  - MongoDB
+  - REST API
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Getting Started
 
-Follow these steps:
+### Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Node.js (v18 or higher)
+- MongoDB
+- npm or yarn
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/finance-tracker.git
+cd finance-tracker
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. Install dependencies
+```bash
+# Install frontend dependencies
+npm install
+
+# Install backend dependencies
+cd server
+npm install
+```
+
+3. Environment Setup
+```bash
+# Create .env file in server directory
+MONGODB_URI=mongodb://127.0.0.1:27017/finance-tracker
+PORT=5000
+```
+
+4. Start the application
+```bash
+# Start backend server
+cd server
+npm run dev
+
+# In a new terminal, start frontend
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Project Structure
 
-**Use GitHub Codespaces**
+```
+finance-tracker/
+├── src/
+│   ├── components/     # Reusable components
+│   ├── pages/         # Page components
+│   ├── services/      # API services
+│   ├── types/         # TypeScript types
+│   └── hooks/         # Custom React hooks
+├── server/
+│   ├── routes/        # API routes
+│   └── models/        # Database models
+└── public/            # Static assets
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Development
 
-## What technologies are used for this project?
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The project is deployed on Vercel:
+- Production URL: [Finance Tracker](https://vercel.com/nehalreddy21s-projects/finance-tracker/EM3HTyGqC7qLACZJwrRVybTwn2B6)
 
-## How can I deploy this project?
+To deploy your own instance:
+1. Fork this repository
+2. Create a Vercel account
+3. Import your forked repository
+4. Configure these environment variables:
+   - `MONGODB_URI`: Your MongoDB connection string
+   - `PORT`: Application port (default: 5000)
+5. Deploy!
 
-Simply open [Lovable](https://lovable.dev/projects/7e611713-cb11-44a4-ab37-6489565d89fa) and click on Share -> Publish.
+## Contributing
 
-## Can I connect a custom domain to my Lovable project?
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Yes, you can!
+## License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
+- [Recharts](https://recharts.org/) for data visualization
+- [MongoDB](https://www.mongodb.com/) for database
+- [Vercel](https://vercel.com/) for hosting
