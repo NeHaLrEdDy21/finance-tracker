@@ -1,11 +1,13 @@
-
 import React, { useState } from "react";
 import { TransactionForm } from "@/components/TransactionForm";
 import { TransactionList } from "@/components/TransactionList";
 import { ExpensesChart } from "@/components/ExpensesChart";
 import { CategoryPieChart } from "@/components/CategoryPieChart";
 import { DashboardSummary } from "@/components/DashboardSummary";
-import { Transaction } from "@/types/types";
+import { Transaction, Budget } from "@/types/types";
+import { BudgetForm } from "@/components/BudgetForm";
+import { BudgetComparison } from "@/components/BudgetComparison";
+import { SpendingInsights } from "@/components/SpendingInsights";
 import { nanoid } from "nanoid";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
@@ -15,6 +17,7 @@ const Index = () => {
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(
     null
   );
+  const [budgets, setBudgets] = useState<Budget[]>([]);
   const { toast } = useToast();
 
   const handleSubmit = (data: Omit<Transaction, "id">) => {
@@ -49,6 +52,23 @@ const Index = () => {
     toast({
       title: "Transaction deleted",
       description: "Your transaction has been successfully deleted.",
+    });
+  };
+
+  const handleBudgetSubmit = (data: Budget) => {
+    const existingBudgetIndex = budgets.findIndex(b => b.category === data.category);
+    
+    if (existingBudgetIndex >= 0) {
+      setBudgets(budgets.map((b, i) => 
+        i === existingBudgetIndex ? data : b
+      ));
+    } else {
+      setBudgets([...budgets, data]);
+    }
+    
+    toast({
+      title: "Budget updated",
+      description: `Budget for ${data.category} has been set to $${data.amount}`,
     });
   };
 
@@ -96,6 +116,24 @@ const Index = () => {
 
       <Card>
         <CardHeader>
+          <CardTitle>Set Budget</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BudgetForm onSubmit={handleBudgetSubmit} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Budget vs Actual</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BudgetComparison budgets={budgets} transactions={transactions} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
           <CardTitle>Transaction History</CardTitle>
         </CardHeader>
         <CardContent>
@@ -106,6 +144,13 @@ const Index = () => {
           />
         </CardContent>
       </Card>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <SpendingInsights 
+          transactions={transactions} 
+          budgets={budgets}
+        />
+      </div>
     </div>
   );
 };

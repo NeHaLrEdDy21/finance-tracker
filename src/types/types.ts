@@ -1,4 +1,3 @@
-
 export type Category = 
   | "Food & Dining"
   | "Transportation"
@@ -14,4 +13,9 @@ export interface Transaction {
   date: string;
   description: string;
   category: Category;
+}
+
+export interface Budget {
+  category: Category;
+  amount: number;
 }

@@ -1,29 +1,26 @@
-
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
-// Connection URI (replace with your actual MongoDB connection string)
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";
-const dbName = process.env.DB_NAME || "finance_tracker";
+const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/finance-tracker';
 
-// Create a new MongoClient
-const client = new MongoClient(uri);
+let cachedClient = null;
+let cachedDb = null;
 
-// Connect to MongoDB
 async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log("Connected successfully to MongoDB");
-    return client.db(dbName);
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    throw error;
-  }
+    if (cachedDb) {
+        return cachedDb;
+    }
+
+    if (!cachedClient) {
+        cachedClient = new MongoClient(uri, {
+            connectTimeoutMS: 5000,
+            serverSelectionTimeoutMS: 5000,
+        });
+        await cachedClient.connect();
+    }
+
+    cachedDb = cachedClient.db('finance-tracker');
+    return cachedDb;
 }
 
-// Close the connection
-async function closeConnection() {
-  await client.close();
-  console.log("MongoDB connection closed");
-}
-
-module.exports = { connectToDatabase, closeConnection };
+module.exports = { connectToDatabase };

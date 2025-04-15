@@ -1,9 +1,25 @@
-
 import axios from 'axios';
 import { Transaction, Category } from '@/types/types';
 
 // API base URL - update this to your actual backend URL
 const API_URL = 'http://localhost:5000/api';
+
+// Add error handling and logging
+axios.interceptors.request.use(request => {
+  console.log('Starting Request:', request);
+  return request;
+});
+
+axios.interceptors.response.use(
+  response => {
+    console.log('Response:', response);
+    return response;
+  },
+  error => {
+    console.error('API Error:', error);
+    return Promise.reject(error);
+  }
+);
 
 // Interface for the transaction data from MongoDB
 interface MongoTransaction {
